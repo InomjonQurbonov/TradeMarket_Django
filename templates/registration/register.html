@@ -1,0 +1,32 @@
+{% extends 'templates/registration/base.html' %}
+{% block title %}Регистрация - Лиза-сама{% endblock %}
+{% block content %}
+    <h2 style="text-align: center; color: #ff69b4; text-transform: uppercase; text-shadow: 2px 2px 4px #ffeb3b;">
+        Регистрация в Аниме-Мир
+    </h2>
+    <div style="padding: 20px; border: 2px solid #ffeb3b; border-radius: 15px;">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Имя Пользователя:</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Электронная Почта:</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password1.id_for_label }}">Пароль:</label>
+                {{ form.password1 }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}">Подтверждение Пароля:</label>
+                {{ form.password2 }}
+            </div>
+            <button type="submit" class="btn">Зарегистрироваться, Дурак!</button>
+            <p style="color: #a18cd1; margin-top: 15px;">
+                Уже есть аккаунт? <a href="{% url 'login' %}" style="color: #ffeb3b; text-decoration: none;">Войти</a>
+            </p>
+        </form>
+    </div>
+{% endblock %}

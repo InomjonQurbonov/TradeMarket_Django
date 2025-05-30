@@ -1,0 +1,27 @@
+{% extends 'templates/app_ads/base.html' %}
+{% block title %}{{ advertiser.ad_title }} - Лиза-сама{% endblock %}
+{% block content %}
+    <h2 style="text-align: center; color: #ff69b4; text-transform: uppercase; text-shadow: 2px 2px 4px #ffeb3b;">
+        {{ advertiser.ad_title }}
+    </h2>
+    <div style="padding: 20px; border: 2px solid #ffeb3b; border-radius: 15px;">
+        <p><strong>Описание:</strong> {{ advertiser.ad_description }}</p>
+        {% if advertiser.ad_image %}
+            <p><strong>Изображение:</strong><br><img src="{{ advertiser.ad_image.url }}" style="max-width: 300px; border-radius: 10px;" alt="{{ advertiser.ad_title }}"></p>
+        {% endif %}
+        <p><strong>Категория:</strong> {{ advertiser.ad_category.name }}</p>
+        <p><strong>Состояние:</strong> {{ advertiser.ad_condition }}</p>
+        <p><strong>Владелец:</strong> {{ advertiser.user_Id.username }}</p>
+        <p><strong>Активно:</strong> {% if advertiser.is_active %}Да{% else %}Нет{% endif %}</p>
+        <p><strong>Создано:</strong> {{ advertiser.created_at }}</p>
+        <p><strong>Обновлено:</strong> {{ advertiser.updated_at }}</p>
+        {% if user == advertiser.user_Id %}
+            <a href="{% url 'advertiser-update' advertiser.pk %}" class="btn">Редактировать</a>
+            <a href="{% url 'advertiser-delete' advertiser.pk %}" class="btn">Удалить</a>
+        {% else %}
+            {% if user.is_authenticated and advertiser.is_active %}
+                <a href="{% url 'swap-offer-create' advertiser.pk %}" class="btn">Предложить Обмен</a>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

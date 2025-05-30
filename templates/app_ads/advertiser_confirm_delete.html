@@ -1,0 +1,12 @@
+{% extends 'templates/app_ads/base.html' %}
+{% block title %}Удалить Объявление - Лиза-сама{% endblock %}
+{% block content %}
+    <h2 style="text-align: center; text-transform: uppercase;">Удалить Объявление</h2>
+    <div style="background-color: #2a2a2a; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
+        <p>Ты уверен, бестолочь, что хочешь удалить "{{ object.title }}"?</p>
+        <div>
+            <button type="submit" class="btn">Да, удалить</button>
+            <a href="{% url 'advertiser-detail' object.pk %}" class="btn">Отмена</a>
+        </div>
+    </div>
+{% endblock %}

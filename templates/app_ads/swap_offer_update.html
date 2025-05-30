@@ -1,0 +1,20 @@
+{% extends 'templates/app_ads/base.html' %}
+{% block title %}Обработать Предложение - Лиза-сама{% endblock %}
+{% block content %}
+    <h2 style="text-align: center; color: #ff69b4; text-transform: uppercase; text-shadow: 2px 2px 4px #ffeb3b;">
+        Обработать Предложение Обмена
+    </h2>
+    <div style="padding: 20px; border: 2px solid #ffeb3b; border-radius: 15px;">
+        <p>Предложение: {{ object.ad_title }} (от {{ object.user_Id.username }})</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.is_active.id_for_label }}">Решение:</label>
+                {{ form.is_active }}
+            </div>
+            <button type="submit" name="action" value="accept" class="btn">Принять</button>
+            <button type="submit" name="action" value="reject" class="btn">Отклонить</button>
+            <a href="{% url 'advertiser-detail' object.pk %}" class="btn">Отмена</a>
+        </form>
+    </div>
+{% endblock %}

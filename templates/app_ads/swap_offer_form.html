@@ -1,0 +1,35 @@
+{% extends 'templates/app_ads/base.html' %}
+{% block title %}Предложить Обмен - Лиза-сама{% endblock %}
+{% block content %}
+    <h2 style="text-align: center; color: #ff69b4; text-transform: uppercase; text-shadow: 2px 2px 4px #ffeb3b;">
+        Предложить Обмен
+    </h2>
+    <div style="padding: 20px; border: 2px solid #ffeb3b; border-radius: 15px;">
+        <p>Создайте своё объявление для обмена на "{{ object.ad_title }}"</p>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.ad_title.id_for_label }}">Название:</label>
+                {{ form.ad_title }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.ad_description.id_for_label }}">Описание:</label>
+                {{ form.ad_description }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.ad_image.id_for_label }}">Изображение:</label>
+                {{ form.ad_image }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.ad_category.id_for_label }}">Категория:</label>
+                {{ form.ad_category }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.ad_condition.id_for_label }}">Состояние:</label>
+                {{ form.ad_condition }}
+            </div>
+            <button type="submit" class="btn">Отправить Предложение, Дурак!</button>
+            <a href="{% url 'advertiser-detail' object.pk %}" class="btn">Отмена</a>
+        </form>
+    </div>
+{% endblock %}
