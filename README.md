@@ -388,4 +388,4 @@ This project is protected under the [MIT-LICENSE](https://github.com/InomjonQurb
 
 ---
 
-<h2>Если в проекте есть какая-либо ошибка, напишите об этом здесь:</h2> [這裡有連結嗎？](https://www.youtube.com/shorts/QfP2sooH-E4) 
+<h2>Если в проекте есть какая-либо ошибка, напишите об этом здесь:<a href="https://www.youtube.com/shorts/QfP2sooH-E4">這裡有連結嗎？</a> </h2>
