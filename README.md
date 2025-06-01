@@ -2,7 +2,9 @@
 <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" align="right" width="30%" style="margin: -20px 0 0 20px;">
 <h1>TRADEMARKET_DJANGO</h1>
 <p align="left">
-	<em><code>❯ REPLACE-ME</code></em>
+	<em><code>
+		❯ Хочешь обновить свои вещи без лишних затрат? Присоединяйся к TradeMarket — платформе, где ты можешь легко обмениваться товарами с другими! Размещай свои объявления, находи крутые предложения и договаривайся об обмене в пару кликов. Удобный поиск, яркий дизайн и мгновенные уведомления сделают процесс увлекательным и простым. Начни обмениваться уже сегодня — твоя следующая находка ждёт тебя на TradeMarket! 🚀
+	</code></em>
 </p>
 <p align="left">
 	<img src="https://img.shields.io/github/license/InomjonQurbonov/TradeMarket_Django?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
@@ -28,7 +30,6 @@
   - [☑️ Prerequisites](#-prerequisites)
   - [⚙️ Installation](#-installation)
   - [🤖 Usage](#🤖-usage)
-  - [🧪 Testing](#🧪-testing)
 - [📌 Project Roadmap](#-project-roadmap)
 - [🔰 Contributing](#-contributing)
 - [🎗 License](#-license)
@@ -313,25 +314,22 @@ Run TradeMarket_Django using the following command:
 **Using `pip`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Pip-3776AB.svg?style={badge_style}&logo=pypi&logoColor=white" />](https://pypi.org/project/pip/)
 
 ```sh
-❯ python {entrypoint}
+❯ python manage.py makemigrations
+❯ python manage.py migrate
+❯ python manage.py runserver
 ```
 
-
-### 🧪 Testing
-Run the test suite using the following command:
-**Using `pip`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Pip-3776AB.svg?style={badge_style}&logo=pypi&logoColor=white" />](https://pypi.org/project/pip/)
-
-```sh
-❯ pytest
-```
 
 
 ---
 ## 📌 Project Roadmap
 
-- [X] **`Task 1`**: <strike>Implement feature one.</strike>
-- [ ] **`Task 2`**: Implement feature two.
-- [ ] **`Task 3`**: Implement feature three.
+- [X] **`Task 1`**: <strike>Preparing the database.</strike>
+- [X] **`Task 2`**: Setting up the first settings.
+- [X] **`Task 3`**: Development of a project registration system.
+- [X] **`Task 4`**: Creating and manually testing models.
+- [X] **`Task 5`**: Preparing 80% of the project (adding and testing filters, search and API systems.
+- [ ] **`Task 3`**: Putting it on the server and running it.
 
 ---
 
@@ -380,7 +378,7 @@ Run the test suite using the following command:
 
 ## 🎗 License
 
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+This project is protected under the [SELECT-A-LICENSE](https://github.com/InomjonQurbonov/TradeMarket_Django?tab=MIT-1-ov-file#readme) License. For more details, refer to the [LICENSE](https://github.com/InomjonQurbonov/TradeMarket_Django?tab=MIT-1-ov-file#readme) file.
 
 ---
 
