@@ -1,5 +1,5 @@
 {% extends 'templates/app_ads/base.html' %}
-{% block title %}{% if form.instance.pk %}Редактировать{% else %}Создать{% endif %} Объявление - Лиза-сама{% endblock %}
+{% block title %}{% if form.instance.pk %}Редактировать{% else %}Создать{% endif %} Объявление{% endblock %}
 {% block content %}
     <h2 style="text-align: center; color: #ff69b4; text-transform: uppercase; text-shadow: 2px 2px 4px #ffeb3b;">
         {% if form.instance.pk %}Редактировать{% else %}Создать{% endif %} Объявление
@@ -33,7 +33,7 @@
                     {{ form.is_active }}
                 </div>
             {% endif %}
-            <button type="submit" class="btn">Сохранить, Бестолочь!</button>
+            <button type="submit" class="btn">Сохранить</button>
         </form>
     </div>
 {% endblock %}

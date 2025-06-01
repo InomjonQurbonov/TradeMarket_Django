@@ -5,7 +5,7 @@
         Предложить Обмен
     </h2>
     <div style="padding: 20px; border: 2px solid #ffeb3b; border-radius: 15px;">
-        <p>Создайте своё объявление для обмена на "{{ object.ad_title }}"</p>
+        <p>Создайте своё объявление для обмена на "{{ target_ad.ad_title }}"</p>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">

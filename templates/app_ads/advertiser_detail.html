@@ -1,5 +1,5 @@
 {% extends 'templates/app_ads/base.html' %}
-{% block title %}{{ advertiser.ad_title }} - Лиза-сама{% endblock %}
+{% block title %}{{ advertiser.ad_title }}{% endblock %}
 {% block content %}
     <h2 style="text-align: center; color: #ff69b4; text-transform: uppercase; text-shadow: 2px 2px 4px #ffeb3b;">
         {{ advertiser.ad_title }}
@@ -18,9 +18,19 @@
         {% if user == advertiser.user_Id %}
             <a href="{% url 'advertiser-update' advertiser.pk %}" class="btn">Редактировать</a>
             <a href="{% url 'advertiser-delete' advertiser.pk %}" class="btn">Удалить</a>
+            <h3 style="color: #ff69b4;">Предложения обмена:</h3>
+            {% for offer in advertiser.related_offers.all %}
+                <div style="margin: 10px 0; padding: 10px; border: 1px solid #a18cd1;">
+                    <p><strong>Название:</strong> {{ offer.ad_title }}</p>
+                    <p><strong>От:</strong> {{ offer.user_Id.username }}</p>
+                    <a href="{% url 'swap-offer-update' target_ad_id=advertiser.pk pk=offer.pk %}" class="btn">Управлять</a>
+                </div>
+            {% empty %}
+                <p>Нет предложений, бестолочь!</p>
+            {% endfor %}
         {% else %}
             {% if user.is_authenticated and advertiser.is_active %}
-                <a href="{% url 'swap-offer-create' advertiser.pk %}" class="btn">Предложить Обмен</a>
+                <a href="{% url 'swap-offer-create' ad_id=advertiser.pk %}" class="btn">Предложить Обмен</a>
             {% endif %}
         {% endif %}
     </div>

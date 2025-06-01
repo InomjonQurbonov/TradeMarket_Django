@@ -1,10 +1,9 @@
-<!-- app_ads/templates/app_ads/base.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Обмен Вещами - Лиза-сама{% endblock %}</title>
+    <title>{% block title %}Обмен Вещами {% endblock %}</title>
     <style>
         body {
             background: linear-gradient(135deg, #ff9a9e, #fad0c4, #96c93d, #a18cd1);
@@ -101,7 +100,7 @@
 </head>
 <body>
     <header>
-        <h1>Обмен Вещами - Лиза-сама</h1>
+        <h1>Обмен Вещами</h1>
         <nav>
             <a href="{% url 'advertiser-list' %}">Объявления</a>
             {% if user.is_authenticated %}

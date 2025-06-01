@@ -1,11 +1,11 @@
 {% extends 'templates/registration/base.html' %}
-{% block title %}Выход - Лиза-сама{% endblock %}
+{% block title %}Выход{% endblock %}
 {% block content %}
     <h2 style="text-align: center; color: #ff69b4; text-transform: uppercase; text-shadow: 2px 2px 4px #ffeb3b;">
-        Выход из Аниме-Мира
+        Выход из TradeSite
     </h2>
     <div style="padding: 20px; border: 2px solid #ffeb3b; border-radius: 15px; text-align: center;">
-        <p style="color: #333; font-size: 1.2em;">Ты вышел, мой неуклюжий подчинённый! Лиза-сама будет скучать, хихи!</p>
+        <p style="color: #333; font-size: 1.2em;">Вы вышли из своего аккаунта, но не волнуйтесь, вы все равно можете видеть Объявления.</p>
         <a href="{% url 'advertiser-list' %}" class="btn">Вернуться к Объявлениям</a>
         <a href="{% url 'login' %}" class="btn">Войти Снова</a>
     </div>

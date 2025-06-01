@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app_ads.models import AdsCategory, Advertiser
+from app_ads.models import AdsCategory, Advertiser, Notification
 
 class AdsCategoryAdmin(admin.ModelAdmin):
     list_filter = ('id', 'category_name')
@@ -19,3 +19,4 @@ class AdsAdmin(admin.ModelAdmin):
 
 admin.site.register(AdsCategory, AdsCategoryAdmin)
 admin.site.register(Advertiser, AdsAdmin)
+admin.site.register(Notification)
