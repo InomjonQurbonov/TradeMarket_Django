@@ -2,8 +2,7 @@ from django.urls import path
 from app_ads.views import (
     AdvertiserListView, AdvertiserDetailView, AdvertiserCreateView,
     AdvertiserUpdateView, AdvertiserDeleteView, SwapOfferCreateView,
-    SwapOfferUpdateView, AdvertiserListAPIView, AdvertiserDetailAPIView,
-    LoginView, RegisterView, LogoutView
+    SwapOfferUpdateView, LoginView, RegisterView, LogoutView
 )
 
 urlpatterns = [
@@ -15,9 +14,6 @@ urlpatterns = [
     path('advertiser/<int:pk>/delete/', AdvertiserDeleteView.as_view(), name='advertiser-delete'),
     path('advertiser/<int:ad_id>/swap-offer/', SwapOfferCreateView.as_view(), name='swap-offer-create'),
     path('advertiser/<int:target_ad_id>/swap-offer/<int:pk>/update/', SwapOfferUpdateView.as_view(), name='swap-offer-update'),
-    # REST API
-    path('api/advertisers/', AdvertiserListAPIView.as_view(), name='advertiser-list-api'),
-    path('api/advertiser/<int:pk>/', AdvertiserDetailAPIView.as_view(), name='advertiser-detail-api'),
     # Аутентификация
     path('login/', LoginView.as_view(), name='login'),
     path('register/', RegisterView.as_view(), name='register'),

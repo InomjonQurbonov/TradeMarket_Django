@@ -9,7 +9,7 @@
         {% if advertiser.ad_image %}
             <p><strong>Изображение:</strong><br><img src="{{ advertiser.ad_image.url }}" style="max-width: 300px; border-radius: 10px;" alt="{{ advertiser.ad_title }}"></p>
         {% endif %}
-        <p><strong>Категория:</strong> {{ advertiser.ad_category.name }}</p>
+        <p><strong>Категория:</strong> {{ advertiser.ad_category }}</p>
         <p><strong>Состояние:</strong> {{ advertiser.ad_condition }}</p>
         <p><strong>Владелец:</strong> {{ advertiser.user_Id.username }}</p>
         <p><strong>Активно:</strong> {% if advertiser.is_active %}Да{% else %}Нет{% endif %}</p>

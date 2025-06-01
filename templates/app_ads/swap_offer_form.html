@@ -1,5 +1,5 @@
 {% extends 'templates/app_ads/base.html' %}
-{% block title %}Предложить Обмен - Лиза-сама{% endblock %}
+{% block title %}Предложить Обмен{% endblock %}
 {% block content %}
     <h2 style="text-align: center; color: #ff69b4; text-transform: uppercase; text-shadow: 2px 2px 4px #ffeb3b;">
         Предложить Обмен
@@ -28,8 +28,8 @@
                 <label for="{{ form.ad_condition.id_for_label }}">Состояние:</label>
                 {{ form.ad_condition }}
             </div>
-            <button type="submit" class="btn">Отправить Предложение, Дурак!</button>
-            <a href="{% url 'advertiser-detail' object.pk %}" class="btn">Отмена</a>
+            <button type="submit" class="btn">Отправить Предложение</button>
+            <a href="{% url 'advertiser-detail' target_ad_id %}" class="btn">Отмена</a>
         </form>
     </div>
 {% endblock %}

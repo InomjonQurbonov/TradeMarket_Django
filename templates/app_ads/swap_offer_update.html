@@ -14,7 +14,7 @@
             </div>
             <button type="submit" name="action" value="accept" class="btn">Принять</button>
             <button type="submit" name="action" value="reject" class="btn">Отклонить</button>
-            <a href="{% url 'advertiser-detail' object.pk %}" class="btn">Отмена</a>
+            <a href="{% url 'advertiser-detail' target_ad_id %}" class="btn">Отмена</a>
         </form>
     </div>
 {% endblock %}

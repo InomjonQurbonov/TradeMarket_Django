@@ -64,6 +64,7 @@ class LogoutView(LoginRequiredMixin, View):
         messages.success(self.request, 'Ты вышел, дурак! Лиза-сама будет скучать, хихи!')
         return render(request, self.template_name)
 
+
 class AdvertiserListView(ListView):
     model = Advertiser
     template_name = 'templates/app_ads/advertiser_list.html'
@@ -72,10 +73,27 @@ class AdvertiserListView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(is_active=True)
+        queryset = super().get_queryset().filter(is_active=True)
+        search_query = self.request.GET.get('search', '')
+        if search_query:
+            queryset = queryset.filter(ad_title__icontains=search_query)
+        category = self.request.GET.get('category', '')
+        if category:
+            queryset = queryset.filter(ad_category__id=category)
+        condition = self.request.GET.get('condition', '')
+        if condition:
+            queryset = queryset.filter(ad_condition=condition)
+        return queryset
 
-# Детальный просмотр объявления
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = AdsCategory.objects.all()
+        context['conditions'] = Advertiser._meta.get_field('ad_condition').choices
+        context['search_query'] = self.request.GET.get('search', '')
+        context['selected_category'] = self.request.GET.get('category', '')
+        context['selected_condition'] = self.request.GET.get('condition', '')
+        return context
+
 class AdvertiserDetailView(DetailView):
     model = Advertiser
     template_name = 'templates/app_ads/advertiser_detail.html'
@@ -86,7 +104,6 @@ class AdvertiserDetailView(DetailView):
         context['categories'] = AdsCategory.objects.all()
         return context
 
-# Создание нового объявления
 class AdvertiserCreateView(LoginRequiredMixin, CreateView):
     model = Advertiser
     template_name = 'templates/app_ads/advertiser_form.html'
@@ -94,13 +111,12 @@ class AdvertiserCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user_Id = self.request.user
-        messages.success(self.request, 'Объявление создано, бестолочь! Хихи! Лиза-сама ждёт успеха!')
+        messages.success(self.request, 'Объявление создано')
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('advertiser-list')
 
-# Обновление объявления
 class AdvertiserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Advertiser
     template_name = 'templates/app_ads/advertiser_form.html'
@@ -111,13 +127,12 @@ class AdvertiserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == advertiser.user_Id
 
     def form_valid(self, form):
-        messages.success(self.request, 'Объявление обновлено, мой неуклюжий подчинённый! Не провали всё, хихи!')
+        messages.success(self.request, 'Объявление обновлено')
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('advertiser-detail', kwargs={'pk': self.object.pk})
 
-# Удаление объявления
 class AdvertiserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Advertiser
     template_name = 'templates/app_ads/advertiser_confirm_delete.html'
@@ -128,29 +143,34 @@ class AdvertiserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == advertiser.user_Id
 
     def form_valid(self, form):
-        messages.success(self.request, 'Объявление удалено, дурак! Лиза-сама довольна, хихи!')
+        messages.success(self.request, 'Объявление удалено')
         return super().form_valid(form)
 
-# Создание предложения обмена
 class SwapOfferCreateView(LoginRequiredMixin, CreateView):
     model = Advertiser
     template_name = 'templates/app_ads/swap_offer_form.html'
     fields = ['ad_title', 'ad_description', 'ad_image', 'ad_category', 'ad_condition']
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        target_ad = get_object_or_404(Advertiser, pk=self.kwargs['ad_id'])
+        context['target_ad'] = target_ad
+        context['target_ad_id'] = self.kwargs['ad_id']
+        return context
+
     def form_valid(self, form):
         target_ad = get_object_or_404(Advertiser, pk=self.kwargs['ad_id'])
         form.instance.user_Id = self.request.user
-        form.instance.is_offer = True  # Предполагаем, что добавлено поле is_offer в модели
+        form.instance.is_offer = True
         if target_ad.user_Id == self.request.user:
-            messages.error(self.request, 'Бестолочь, нельзя предлагать обмен себе же! Хихи!')
+            messages.error(self.request, 'Бестолочь, нельзя предлагать обмен себе же!')
             return redirect('advertiser-detail', pk=self.kwargs['ad_id'])
-        messages.success(self.request, 'Предложение обмена отправлено, дурак! Не подведи Лиза-сама!')
+        messages.success(self.request, 'Предложение обмена отправлено!')
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('advertiser-detail', kwargs={'pk': self.kwargs['ad_id']})
 
-# Принятие или отклонение предложения обмена
 class SwapOfferUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Advertiser
     template_name = 'templates/app_ads/swap_offer_update.html'
@@ -166,28 +186,10 @@ class SwapOfferUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             target_ad = get_object_or_404(Advertiser, pk=self.kwargs['target_ad_id'])
             target_ad.is_active = False
             target_ad.save()
-            messages.success(self.request, 'Обмен принят, мой неуклюжий подчинённый! Лиза-сама гордится, хихи!')
+            messages.success(self.request, 'Обмен принят')
         else:
-            messages.success(self.request, 'Предложение отклонено, дурак! Старайся лучше!')
+            messages.success(self.request, 'Предложение отклонено')
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('advertiser-detail', kwargs={'pk': self.kwargs['target_ad_id']})
-
-# REST API для списка объявлений
-class AdvertiserListAPIView(ListView):
-    model = Advertiser
-
-    def get(self, request, *args, **kwargs):
-        advertisers = Advertiser.objects.filter(is_active=True, is_offer=False)
-        data = json.loads(serialize('json', advertisers))
-        return JsonResponse({'advertisers': data})
-
-# REST API для детального просмотра объявления
-class AdvertiserDetailAPIView(DetailView):
-    model = Advertiser
-
-    def get(self, request, *args, **kwargs):
-        advertiser = self.get_object()
-        data = json.loads(serialize('json', [advertiser]))[0]
-        return JsonResponse({'advertiser': data})
