@@ -378,7 +378,7 @@ Run TradeMarket_Django using the following command:
 
 ## 🎗 License
 
-This project is protected under the [SELECT-A-LICENSE](https://github.com/InomjonQurbonov/TradeMarket_Django?tab=MIT-1-ov-file#readme) License. For more details, refer to the [LICENSE](https://github.com/InomjonQurbonov/TradeMarket_Django?tab=MIT-1-ov-file#readme) file.
+This project is protected under the [MIT-LICENSE](https://github.com/InomjonQurbonov/TradeMarket_Django?tab=MIT-1-ov-file#readme) License. For more details, refer to the [LICENSE](https://github.com/InomjonQurbonov/TradeMarket_Django?tab=MIT-1-ov-file#readme) file.
 
 ---
 
@@ -387,3 +387,5 @@ This project is protected under the [SELECT-A-LICENSE](https://github.com/Inomjo
 - List any resources, contributors, inspiration, etc. here.
 
 ---
+
+<h2>Если в проекте есть какая-либо ошибка, напишите об этом здесь:[這裡有連結嗎?](https://www.youtube.com/shorts/QfP2sooH-E4) </h2>
